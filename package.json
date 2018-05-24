@@ -1,0 +1,32 @@
+{
+  "name": "my-holidays",
+  "version": "1.0.0",
+  "description": "Malaysian Holidays Calendar",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=testing node_modules/.bin/mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scr1p7ed/my-holidays.git"
+  },
+  "keywords": [
+    "malaysia",
+    "public",
+    "holiday"
+  ],
+  "author": "ivan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scr1p7ed/my-holidays/issues"
+  },
+  "homepage": "https://github.com/scr1p7ed/my-holidays#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "should": "^13.2.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.10",
+    "moment": "^2.22.1"
+  }
+}

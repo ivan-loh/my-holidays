@@ -20,10 +20,10 @@ const result    = holidays.check("20180101")
 ```
 
 ```json
-{ date: 2017-12-31T16:00:00.000Z,
-  name: 'New Year\'s Day',
-  includes: [ 'National' ],
-  excludes: [ 'Johor', 'Kedah', 'Kelantan', 'Perlis', 'Terengganu' ] }
+{ "date": "2017-12-31T16:00:00.000Z",
+  "name": "New Year\'s Day",
+  "includes": [ "National" ],
+  "excludes": [ "Johor", "Kedah", "Kelantan", "Perlis", "Terengganu" ] }
 ```
 ### source
 - [officeholidays](https://www.officeholidays.com/countries/malaysia/)

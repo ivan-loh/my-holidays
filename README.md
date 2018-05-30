@@ -1,4 +1,7 @@
 # my-holidays
+
+[![NPM](https://nodei.co/npm/my-holidays.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/my-holidays/)
+
 Malaysian Holidays Calendar
 
 ### Sample

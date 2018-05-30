@@ -1,6 +1,6 @@
 {
   "name": "my-holidays",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Malaysian Holidays Calendar",
   "main": "index.js",
   "scripts": {

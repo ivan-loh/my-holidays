@@ -7,7 +7,7 @@ const dataset = require('./data.json');
 
 const MyHolidays = function(year) {
 
-  const index = year || "2018";
+  const index = year || moment().format('YYYY');
 
   this.holidays = dataset[index];
   this.holidays.forEach( holiday => { holiday.date = moment(holiday.date).toDate(); });

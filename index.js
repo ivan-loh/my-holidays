@@ -10,7 +10,7 @@ const MyHolidays = function(year) {
   const index = year || moment().format('YYYY');
 
   this.holidays = dataset[index];
-  this.holidays.forEach( holiday => { holiday.date = moment(holiday.date).toDate(); });
+  this.holidays.forEach( holiday => { holiday.date = moment(holiday.date, 'YYYYMMDD').toDate(); });
 
 };
 

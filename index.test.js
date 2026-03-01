@@ -1,12 +1,10 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { createRequire } from 'node:module';
+import dataset from './data.json' with { type: 'json' };
 import MyHolidays from './index.js';
 
-const require = createRequire(import.meta.url);
-const dataset = require('./data.json');
-
 describe('MyHolidays', () => {
+
   describe('data integrity', () => {
     const VALID_STATES = new Set([
       'National', 'Johor', 'Kedah', 'Kelantan', 'Kuala Lumpur', 'Labuan',
@@ -15,42 +13,42 @@ describe('MyHolidays', () => {
     ]);
 
     for (const year of Object.keys(dataset)) {
-      it(`${year}: all entries have correct schema (date, name, includes, excludes)`, () => {
-        for (const h of dataset[year]) {
-          const keys = Object.keys(h).sort().join(',');
-          assert.equal(keys, 'date,excludes,includes,name', `bad keys in ${year}: ${JSON.stringify(h)}`);
-          assert.equal(typeof h.date, 'string');
-          assert.equal(typeof h.name, 'string');
-          assert.ok(Array.isArray(h.includes));
-          assert.ok(Array.isArray(h.excludes));
+      it(`${year}: correct schema (date, name, includes, excludes)`, () => {
+        for (const entry of dataset[year]) {
+          const keys = Object.keys(entry).sort().join(',');
+          assert.equal(keys, 'date,excludes,includes,name');
+          assert.equal(typeof entry.date, 'string');
+          assert.equal(typeof entry.name, 'string');
+          assert.ok(Array.isArray(entry.includes));
+          assert.ok(Array.isArray(entry.excludes));
         }
       });
 
-      it(`${year}: all dates are valid YYYYMMDD in the correct year`, () => {
-        for (const h of dataset[year]) {
-          assert.match(h.date, /^[0-9]{8}$/, `bad format: ${h.date}`);
-          const y = +h.date.slice(0, 4);
-          const m = +h.date.slice(4, 6);
-          const d = +h.date.slice(6, 8);
-          const dt = new Date(y, m - 1, d);
-          assert.equal(dt.getFullYear(), y, `invalid date: ${h.date}`);
-          assert.equal(dt.getMonth(), m - 1, `invalid date: ${h.date}`);
-          assert.equal(dt.getDate(), d, `invalid date: ${h.date}`);
-          assert.equal(String(y), year, `year mismatch: ${h.date} in ${year}`);
+      it(`${year}: valid YYYYMMDD dates in the correct year`, () => {
+        for (const entry of dataset[year]) {
+          assert.match(entry.date, /^[0-9]{8}$/);
+          const y = +entry.date.slice(0, 4);
+          const m = +entry.date.slice(4, 6);
+          const d = +entry.date.slice(6, 8);
+          const parsed = new Date(y, m - 1, d);
+          assert.equal(parsed.getFullYear(), y);
+          assert.equal(parsed.getMonth(), m - 1);
+          assert.equal(parsed.getDate(), d);
+          assert.equal(String(y), year);
         }
       });
 
-      it(`${year}: dates are chronologically sorted`, () => {
-        const dates = dataset[year].map(h => h.date);
+      it(`${year}: chronologically sorted`, () => {
+        const dates = dataset[year].map(entry => entry.date);
         for (let i = 1; i < dates.length; i++) {
-          assert.ok(dates[i] >= dates[i - 1], `out of order: ${dates[i]} after ${dates[i - 1]}`);
+          assert.ok(dates[i] >= dates[i - 1], `${dates[i]} before ${dates[i - 1]}`);
         }
       });
 
-      it(`${year}: all state names are valid`, () => {
-        for (const h of dataset[year]) {
-          h.includes.forEach(s => assert.ok(VALID_STATES.has(s), `unknown include: ${s} in ${h.name}`));
-          h.excludes.forEach(s => assert.ok(VALID_STATES.has(s), `unknown exclude: ${s} in ${h.name}`));
+      it(`${year}: valid state names`, () => {
+        for (const entry of dataset[year]) {
+          for (const s of entry.includes) assert.ok(VALID_STATES.has(s), `unknown: ${s}`);
+          for (const s of entry.excludes) assert.ok(VALID_STATES.has(s), `unknown: ${s}`);
         }
       });
     }
@@ -69,6 +67,7 @@ describe('MyHolidays', () => {
       const cny = mh.holidays.find(h => h.name === 'Chinese New Year');
       assert.ok(cny);
       assert.equal(cny.category, 'cultural');
+
       const deepavali = mh.holidays.find(h => h.name === 'Deepavali');
       assert.ok(deepavali);
       assert.equal(deepavali.category, 'cultural');
@@ -79,6 +78,7 @@ describe('MyHolidays', () => {
       const labour = mh.holidays.find(h => h.name === 'Labour Day');
       assert.ok(labour);
       assert.equal(labour.category, 'national');
+
       const merdeka = mh.holidays.find(h => /Merdeka/.test(h.name));
       assert.ok(merdeka);
       assert.equal(merdeka.category, 'national');
@@ -95,9 +95,9 @@ describe('MyHolidays', () => {
       const mh = new MyHolidays(2020);
       const replacements = mh.holidays.filter(h => h.replacement);
       assert.ok(replacements.length > 0);
-      replacements.forEach(h => {
+      for (const h of replacements) {
         assert.match(h.name, /Holiday|Replacement|in lieu/i);
-      });
+      }
     });
 
     it('does not flag primary holidays as replacements', () => {
@@ -144,33 +144,31 @@ describe('MyHolidays', () => {
   describe('list()', () => {
     it('returns a shallow copy of all holidays', () => {
       const mh = new MyHolidays(2026);
-      const list = mh.list();
-      assert.ok(Array.isArray(list));
-      assert.equal(list.length, mh.holidays.length);
-      assert.notEqual(list, mh.holidays);
+      const all = mh.list();
+      assert.ok(Array.isArray(all));
+      assert.equal(all.length, mh.holidays.length);
+      assert.notEqual(all, mh.holidays);
     });
 
-    it('filters by state — Selangor gets national holidays minus exclusions', () => {
+    it('filters by state — Selangor gets national minus exclusions', () => {
       const mh = new MyHolidays(2026);
       const selangor = mh.list('Selangor');
       assert.ok(selangor.length > 0);
       assert.ok(selangor.length < mh.holidays.length);
-      selangor.forEach(h => {
-        const isNational = h.includes.includes('National');
-        const isStateSpecific = h.includes.includes('Selangor');
-        if (isNational) {
+
+      for (const h of selangor) {
+        if (h.includes.includes('National')) {
           assert.ok(!h.excludes.includes('Selangor'));
         } else {
-          assert.ok(isStateSpecific);
+          assert.ok(h.includes.includes('Selangor'));
         }
-      });
+      }
     });
 
     it('filters by state — Sarawak excludes Deepavali', () => {
       const mh = new MyHolidays(2026);
       const sarawak = mh.list('Sarawak');
-      const deepavali = sarawak.find(h => h.name === 'Deepavali');
-      assert.equal(deepavali, undefined);
+      assert.equal(sarawak.find(h => h.name === 'Deepavali'), undefined);
     });
   });
 
@@ -191,16 +189,13 @@ describe('MyHolidays', () => {
 
     it('returns undefined for a non-holiday', () => {
       const mh = new MyHolidays(2026);
-      const result = mh.check('2026-07-15');
-      assert.equal(result, undefined);
+      assert.equal(mh.check('2026-07-15'), undefined);
     });
 
     it('filters by state when checking', () => {
       const mh = new MyHolidays(2026);
-      const forJohor = mh.check('2026-01-01', 'Johor');
-      assert.equal(forJohor, undefined);
-      const forKL = mh.check('2026-01-01', 'Kuala Lumpur');
-      assert.ok(forKL);
+      assert.equal(mh.check('2026-01-01', 'Johor'), undefined);
+      assert.ok(mh.check('2026-01-01', 'Kuala Lumpur'));
     });
 
     it('finds Chinese New Year 2026 on Feb 17', () => {
@@ -245,15 +240,16 @@ describe('MyHolidays', () => {
       const jan = mh.between('2026-01-01', '2026-01-31');
       assert.ok(Array.isArray(jan));
       assert.ok(jan.length >= 1);
-      jan.forEach(h => {
+
+      for (const h of jan) {
         assert.ok(h.date >= new Date(2026, 0, 1));
         assert.ok(h.date <= new Date(2026, 0, 31));
-      });
+      }
     });
 
     it('filters by state in range query', () => {
       const mh = new MyHolidays(2026);
-      const allJan = mh.between('2026-01-01', '2026-01-31');
+      const allJan      = mh.between('2026-01-01', '2026-01-31');
       const selangorJan = mh.between('2026-01-01', '2026-01-31', 'Selangor');
       assert.ok(selangorJan.length <= allJan.length);
     });
@@ -267,8 +263,7 @@ describe('MyHolidays', () => {
     it('finds Hari Raya Aidilfitri 2026 in March range', () => {
       const mh = new MyHolidays(2026);
       const march = mh.between('2026-03-20', '2026-03-25');
-      const raya = march.find(h => /Hari Raya Aidilfitri/.test(h.name));
-      assert.ok(raya);
+      assert.ok(march.find(h => /Hari Raya Aidilfitri/.test(h.name)));
     });
   });
 
@@ -289,18 +284,18 @@ describe('MyHolidays', () => {
 
     it('filters by state', () => {
       const mh = new MyHolidays(2026);
-      const nextForSarawak = mh.next(new Date(2026, 0, 1), 'Sarawak');
-      assert.ok(nextForSarawak);
-      const isRelevant = nextForSarawak.includes.includes('National')
-        ? !nextForSarawak.excludes.includes('Sarawak')
-        : nextForSarawak.includes.includes('Sarawak');
-      assert.ok(isRelevant);
+      const result = mh.next(new Date(2026, 0, 1), 'Sarawak');
+      assert.ok(result);
+
+      const relevant = result.includes.includes('National')
+        ? !result.excludes.includes('Sarawak')
+        : result.includes.includes('Sarawak');
+      assert.ok(relevant);
     });
 
     it('returns undefined when no more holidays in the year', () => {
       const mh = new MyHolidays(2026);
-      const result = mh.next(new Date(2026, 11, 31));
-      assert.equal(result, undefined);
+      assert.equal(mh.next(new Date(2026, 11, 31)), undefined);
     });
   });
 
@@ -327,9 +322,11 @@ describe('MyHolidays', () => {
 
     it('uses Fri-Sat weekends for Kelantan', () => {
       const mh = new MyHolidays(2026);
+
       const friday = new Date(2026, 0, 2);
       assert.equal(friday.getDay(), 5);
       assert.equal(mh.isBusinessDay(friday, 'Kelantan'), false);
+
       const sunday = new Date(2026, 0, 4);
       assert.equal(sunday.getDay(), 0);
       assert.equal(mh.isBusinessDay(sunday, 'Kelantan'), true);
@@ -337,8 +334,10 @@ describe('MyHolidays', () => {
 
     it('Johor uses Sat-Sun weekends from 2025 onwards', () => {
       const mh = new MyHolidays(2026);
+
       const friday = new Date(2026, 0, 2);
       assert.equal(mh.isBusinessDay(friday, 'Johor'), true);
+
       const saturday = new Date(2026, 0, 3);
       assert.equal(mh.isBusinessDay(saturday, 'Johor'), false);
     });
@@ -347,25 +346,21 @@ describe('MyHolidays', () => {
   describe('businessDays()', () => {
     it('counts business days in a week (Mon-Fri)', () => {
       const mh = new MyHolidays(2026);
-      const count = mh.businessDays(new Date(2026, 0, 5), new Date(2026, 0, 9));
-      assert.equal(count, 5);
+      assert.equal(mh.businessDays(new Date(2026, 0, 5), new Date(2026, 0, 9)), 5);
     });
 
     it('excludes weekends', () => {
       const mh = new MyHolidays(2026);
-      const count = mh.businessDays(new Date(2026, 0, 5), new Date(2026, 0, 11));
-      assert.equal(count, 5);
+      assert.equal(mh.businessDays(new Date(2026, 0, 5), new Date(2026, 0, 11)), 5);
     });
 
     it('excludes public holidays', () => {
       const mh = new MyHolidays(2026);
-      const withoutHoliday = mh.businessDays(new Date(2026, 0, 1), new Date(2026, 0, 2));
-      assert.equal(withoutHoliday, 1);
+      assert.equal(mh.businessDays(new Date(2026, 0, 1), new Date(2026, 0, 2)), 1);
     });
 
     it('respects state weekends for Kelantan', () => {
       const mh = new MyHolidays(2026);
-      const standard = mh.businessDays(new Date(2026, 0, 5), new Date(2026, 0, 11));
       const kelantan = mh.businessDays(new Date(2026, 0, 5), new Date(2026, 0, 11), 'Kelantan');
       assert.ok(typeof kelantan === 'number');
       assert.ok(kelantan >= 4);
@@ -373,8 +368,7 @@ describe('MyHolidays', () => {
 
     it('returns 0 for a single weekend day', () => {
       const mh = new MyHolidays(2026);
-      const count = mh.businessDays(new Date(2026, 0, 3), new Date(2026, 0, 3));
-      assert.equal(count, 0);
+      assert.equal(mh.businessDays(new Date(2026, 0, 3), new Date(2026, 0, 3)), 0);
     });
   });
 });

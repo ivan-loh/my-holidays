@@ -4,30 +4,55 @@
 
 Malaysian Holidays Calendar
 
-### Sample
+Zero dependencies. Uses only Node.js built-in APIs.
 
-List all holidays
+### Usage
+
+List all holidays for a year:
 
 ```js
-const MyHolidays = require('my-holidays');
-const holiday    = new MyHolidays(2018);
-const result     = holidays.list()
+import MyHolidays from 'my-holidays';
+
+const holidays = new MyHolidays(2024);
+const list = holidays.list();
 ```
 
-Check date for holiday
+Check if a date is a holiday:
 
 ```js
-const MyHolidays = require('my-holidays');
-const holiday   = new MyHolidays(2018);
-const result    = holidays.check("20180101")
+import MyHolidays from 'my-holidays';
+
+const holidays = new MyHolidays(2024);
+const result = holidays.check('2024-01-01');
 ```
 
 ```json
-{ "date": "2017-12-31T16:00:00.000Z",
-  "name": "New Year\'s Day",
-  "includes": [ "National" ],
-  "excludes": [ "Johor", "Kedah", "Kelantan", "Perlis", "Terengganu" ] }
+{
+  "date": "2024-01-01T00:00:00.000Z",
+  "name": "New Year's Day",
+  "includes": ["National"],
+  "excludes": ["Johor", "Kedah", "Kelantan", "Perlis", "Terengganu"]
+}
 ```
-### source
+
+### API
+
+#### `new MyHolidays(year?)`
+
+Creates an instance for the given year. Defaults to the current year. Throws `RangeError` if no data is available for the requested year.
+
+#### `.list()`
+
+Returns a shallow copy of all holidays for the year.
+
+#### `.check(date)`
+
+Accepts a `Date` object or date string. Returns the matching holiday object or `undefined`.
+
+### Data coverage
+
+2018 – 2026
+
+### Source
 - [officeholidays](https://www.officeholidays.com/countries/malaysia/)
-- [publicholidays](https://publicholidays.com.my/2018-dates/)
+- [publicholidays](https://publicholidays.com.my/)

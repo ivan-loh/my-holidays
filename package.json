@@ -1,10 +1,17 @@
 {
   "name": "my-holidays",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "Malaysian Holidays Calendar",
+  "type": "module",
+  "exports": {
+    ".": "./index.js"
+  },
   "main": "index.js",
+  "engines": {
+    "node": ">=18.20.0"
+  },
   "scripts": {
-    "test": "NODE_ENV=testing node_modules/.bin/mocha --recursive"
+    "test": "node --test"
   },
   "repository": {
     "type": "git",
@@ -20,13 +27,5 @@
   "bugs": {
     "url": "https://github.com/scr1p7ed/my-holidays/issues"
   },
-  "homepage": "https://github.com/scr1p7ed/my-holidays#readme",
-  "devDependencies": {
-    "mocha": "^5.2.0",
-    "should": "^13.2.1"
-  },
-  "dependencies": {
-    "lodash": "^4.17.10",
-    "moment": "^2.22.1"
-  }
+  "homepage": "https://github.com/scr1p7ed/my-holidays#readme"
 }

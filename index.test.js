@@ -1,8 +1,113 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
 import MyHolidays from './index.js';
 
+const require = createRequire(import.meta.url);
+const dataset = require('./data.json');
+
 describe('MyHolidays', () => {
+  describe('data integrity', () => {
+    const VALID_STATES = new Set([
+      'National', 'Johor', 'Kedah', 'Kelantan', 'Kuala Lumpur', 'Labuan',
+      'Melaka', 'Negeri Sembilan', 'Pahang', 'Penang', 'Perak', 'Perlis',
+      'Putrajaya', 'Sabah', 'Sarawak', 'Selangor', 'Terengganu',
+    ]);
+
+    for (const year of Object.keys(dataset)) {
+      it(`${year}: all entries have correct schema (date, name, includes, excludes)`, () => {
+        for (const h of dataset[year]) {
+          const keys = Object.keys(h).sort().join(',');
+          assert.equal(keys, 'date,excludes,includes,name', `bad keys in ${year}: ${JSON.stringify(h)}`);
+          assert.equal(typeof h.date, 'string');
+          assert.equal(typeof h.name, 'string');
+          assert.ok(Array.isArray(h.includes));
+          assert.ok(Array.isArray(h.excludes));
+        }
+      });
+
+      it(`${year}: all dates are valid YYYYMMDD in the correct year`, () => {
+        for (const h of dataset[year]) {
+          assert.match(h.date, /^[0-9]{8}$/, `bad format: ${h.date}`);
+          const y = +h.date.slice(0, 4);
+          const m = +h.date.slice(4, 6);
+          const d = +h.date.slice(6, 8);
+          const dt = new Date(y, m - 1, d);
+          assert.equal(dt.getFullYear(), y, `invalid date: ${h.date}`);
+          assert.equal(dt.getMonth(), m - 1, `invalid date: ${h.date}`);
+          assert.equal(dt.getDate(), d, `invalid date: ${h.date}`);
+          assert.equal(String(y), year, `year mismatch: ${h.date} in ${year}`);
+        }
+      });
+
+      it(`${year}: dates are chronologically sorted`, () => {
+        const dates = dataset[year].map(h => h.date);
+        for (let i = 1; i < dates.length; i++) {
+          assert.ok(dates[i] >= dates[i - 1], `out of order: ${dates[i]} after ${dates[i - 1]}`);
+        }
+      });
+
+      it(`${year}: all state names are valid`, () => {
+        for (const h of dataset[year]) {
+          h.includes.forEach(s => assert.ok(VALID_STATES.has(s), `unknown include: ${s} in ${h.name}`));
+          h.excludes.forEach(s => assert.ok(VALID_STATES.has(s), `unknown exclude: ${s} in ${h.name}`));
+        }
+      });
+    }
+  });
+
+  describe('category and replacement flags', () => {
+    it('tags Islamic holidays correctly', () => {
+      const mh = new MyHolidays(2026);
+      const raya = mh.holidays.find(h => /Hari Raya Aidilfitri/.test(h.name) && !h.replacement);
+      assert.ok(raya);
+      assert.equal(raya.category, 'islamic');
+    });
+
+    it('tags cultural holidays correctly', () => {
+      const mh = new MyHolidays(2026);
+      const cny = mh.holidays.find(h => h.name === 'Chinese New Year');
+      assert.ok(cny);
+      assert.equal(cny.category, 'cultural');
+      const deepavali = mh.holidays.find(h => h.name === 'Deepavali');
+      assert.ok(deepavali);
+      assert.equal(deepavali.category, 'cultural');
+    });
+
+    it('tags national holidays correctly', () => {
+      const mh = new MyHolidays(2026);
+      const labour = mh.holidays.find(h => h.name === 'Labour Day');
+      assert.ok(labour);
+      assert.equal(labour.category, 'national');
+      const merdeka = mh.holidays.find(h => /Merdeka/.test(h.name));
+      assert.ok(merdeka);
+      assert.equal(merdeka.category, 'national');
+    });
+
+    it('tags state holidays correctly', () => {
+      const mh = new MyHolidays(2026);
+      const ftDay = mh.holidays.find(h => h.name === 'Federal Territory Day');
+      assert.ok(ftDay);
+      assert.equal(ftDay.category, 'state');
+    });
+
+    it('flags replacement holidays with Holiday suffix', () => {
+      const mh = new MyHolidays(2020);
+      const replacements = mh.holidays.filter(h => h.replacement);
+      assert.ok(replacements.length > 0);
+      replacements.forEach(h => {
+        assert.match(h.name, /Holiday|Replacement|in lieu/i);
+      });
+    });
+
+    it('does not flag primary holidays as replacements', () => {
+      const mh = new MyHolidays(2026);
+      const primary = mh.check(new Date(2026, 0, 1));
+      assert.ok(primary);
+      assert.equal(primary.replacement, false);
+    });
+  });
+
   describe('constructor', () => {
     it('loads holidays for a valid year', () => {
       const mh = new MyHolidays(2026);

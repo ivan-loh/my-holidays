@@ -30,6 +30,22 @@ function matchesState(holiday, state) {
   return holiday.includes.includes(state);
 }
 
+const ISLAMIC = /Hari Raya|Aidilfitri|Haji|Awal Ramadan|Nuzul Al-Quran|Israk|Mikraj|Awal Muharram|Prophet Muhammad|Mawlid|Arafat/i;
+const CULTURAL = /Chinese New Year|Thaipusam|Deepavali|Wesak|Harvest Festival|Hari Gawai|Christmas|Good Friday/i;
+const STATE = /Sultan|Governor|Raja Perlis|YDPB|Installation|Hari Hol|Georgetown|Sarawak Day|Federal Territory Day|Declaration of Melaka|Independence Declaration/i;
+const REPLACEMENT = /Holiday$|Replacement|in lieu/i;
+
+function categorize(name) {
+  if (ISLAMIC.test(name)) return 'islamic';
+  if (CULTURAL.test(name)) return 'cultural';
+  if (STATE.test(name)) return 'state';
+  return 'national';
+}
+
+function isReplacement(name) {
+  return REPLACEMENT.test(name);
+}
+
 export default class MyHolidays {
   constructor(year) {
     const key = year != null ? String(year) : String(new Date().getFullYear());
@@ -40,6 +56,8 @@ export default class MyHolidays {
     this.holidays = data.map(h => ({
       ...h,
       date: new Date(+h.date.slice(0, 4), +h.date.slice(4, 6) - 1, +h.date.slice(6, 8)),
+      category: categorize(h.name),
+      replacement: isReplacement(h.name),
     }));
   }
 

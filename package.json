@@ -7,6 +7,10 @@
     ".": "./index.js"
   },
   "main": "index.js",
+  "files": [
+    "index.js",
+    "data.json"
+  ],
   "engines": {
     "node": ">=18.20.0"
   },

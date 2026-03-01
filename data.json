@@ -975,585 +975,344 @@
     {
       "date": "20200101",
       "name": "New Year's Day",
-      "includes": [
-        "National"
-      ],
-      "excludes": [
-        "Johor",
-        "Kedah",
-        "Kelantan",
-        "Perlis",
-        "Terengganu"
-      ]
+      "includes": ["National"],
+      "excludes": ["Johor", "Kedah", "Kelantan", "Perlis", "Terengganu"]
     },
     {
       "date": "20200114",
       "name": "YDPB Negeri Sembilan's Birthday",
-      "includes": [
-        "Negeri Sembilan"
-      ]
+      "includes": ["Negeri Sembilan"],
+      "excludes": []
     },
     {
       "date": "20200125",
       "name": "Chinese New Year",
-      "includes": [
-        "National"
-      ]
+      "includes": ["National"],
+      "excludes": []
     },
     {
       "date": "20200126",
-      "name": "Chinese New Year Holiday",
-      "includes": [
-        "National"
-      ]
+      "name": "Chinese New Year",
+      "includes": ["National"],
+      "excludes": []
     },
     {
       "date": "20200127",
       "name": "Chinese New Year Holiday",
-      "includes": [
-        "National"
-      ],
-      "excludes": [
-        "Johor",
-        "Kedah"
-      ]
+      "includes": ["National"],
+      "excludes": ["Johor", "Kedah", "Kelantan", "Terengganu"]
     },
     {
       "date": "20200201",
       "name": "Federal Territory Day",
-      "includes": [
-        "Kuala Lumpur",
-        "Labuan",
-        "Putrajaya"
-      ]
+      "includes": ["Kuala Lumpur", "Labuan", "Putrajaya"],
+      "excludes": []
     },
     {
       "date": "20200208",
       "name": "Thaipusam",
-      "includes": [
-        "Johor",
-        "Kuala Lumpur",
-        "Negeri Sembilan",
-        "Penang",
-        "Perak",
-        "Putrajaya",
-        "Selangor"
-      ]
+      "includes": ["Johor", "Kuala Lumpur", "Negeri Sembilan", "Penang", "Perak", "Putrajaya", "Selangor"],
+      "excludes": []
     },
     {
       "date": "20200304",
       "name": "Installation of Sultan Terengganu",
-      "includes": [
-        "Terengganu"
-      ]
+      "includes": ["Terengganu"],
+      "excludes": []
     },
     {
       "date": "20200322",
       "name": "Israk and Mikraj",
-      "includes": [
-        "Kedah",
-        "Negeri Sembilan",
-        "Perlis",
-        "Terengganu"
-      ]
-    },
-    {
-      "date": "20200323",
-      "name": "Sultan of Johor's Birthday",
-      "includes": [
-        "Johor"
-      ]
+      "includes": ["Kedah", "Negeri Sembilan", "Perlis", "Terengganu"],
+      "excludes": []
     },
     {
       "date": "20200323",
       "name": "Israk and Mikraj Holiday",
-      "includes": [
-        "Negeri Sembilan",
-        "Perlis"
-      ]
+      "includes": ["Negeri Sembilan", "Perlis"],
+      "excludes": []
     },
     {
-      "date": "20190415",
-      "name": "Declaration of Melaka as a Historical City",
-      "includes": [
-        "Melaka"
-      ]
+      "date": "20200323",
+      "name": "Sultan of Johor's Birthday",
+      "includes": ["Johor"],
+      "excludes": []
     },
     {
-      "date": "20190410",
+      "date": "20200410",
       "name": "Good Friday",
-      "includes": [
-        "Sabah",
-        "Sarawak"
-      ]
+      "includes": ["Sabah", "Sarawak"],
+      "excludes": []
     },
     {
-      "date": "20190424",
+      "date": "20200415",
+      "name": "Declaration of Melaka as a Historical City",
+      "includes": ["Melaka"],
+      "excludes": []
+    },
+    {
+      "date": "20200424",
       "name": "Awal Ramadan",
-      "includes": [
-        "Johor",
-        "Kedah",
-        "Melaka"
-      ]
+      "includes": ["Johor", "Kedah", "Melaka"],
+      "excludes": []
     },
     {
-      "date": "20190426",
+      "date": "20200426",
       "name": "Sultan of Terengganu's Birthday",
-      "includes": [
-        "Terengganu"
-      ]
+      "includes": ["Terengganu"],
+      "excludes": []
     },
     {
-      "date": "20190426",
+      "date": "20200426",
       "name": "Awal Ramadan Holiday",
-      "includes": [
-        "Johor",
-        "Kedah"
-      ]
+      "includes": ["Johor", "Kedah"],
+      "excludes": []
     },
     {
-      "date": "2019051",
+      "date": "20200501",
       "name": "Labour Day",
-      "includes": [
-        "National"
-      ]
+      "includes": ["National"],
+      "excludes": []
     },
     {
-      "date": "2019053",
-      "name": "Labour Day Holiday",
-      "includes": [
-        "Johor",
-        "Kedah"
-      ]
-    },
-    {
-      "date": "2019057",
-      "name": "Hari Hol Pahang",
-      "includes": [
-        "Pahang"
-      ]
-    },
-    {
-      "date": "2019057",
+      "date": "20200507",
       "name": "Wesak Day",
-      "includes": [
-        "National"
-      ]
+      "includes": ["National"],
+      "excludes": []
     },
     {
-      "date": "20190510",
-      "name": "Nuzul Al-Quran",
-      "includes": [
-        "National"
-      ],
-      "excludes": [
-        "Johor",
-        "Kedah",
-        "Melaka",
-        "Negeri Sembilan",
-        "Sabah",
-        "Sarawak"
-      ]
-    },
-    {
-      "date": "20190511",
-      "name": "Nuzul Al-Quran Holiday",
-      "includes": [
-        "Kuala Lumpur",
-        "Labuan",
-        "Pahang",
-        "Penang",
-        "Perak",
-        "Perlis",
-        "Putrajaya",
-        "Selangor"
-      ]
-    },
-    {
-      "date": "20190524",
-      "name": "Hari Raya Aidilfitri",
-      "includes": [
-        "National"
-      ]
-    },
-    {
-      "date": "20190525",
-      "name": "Hari Raya Aidilfitri Holiday",
-      "includes": [
-        "National"
-      ]
-    },
-    {
-      "date": "20190526",
-      "name": "Hari Raya Aidilfitri Holiday",
-      "includes": [
-        "National"
-      ],
-      "excludes": [
-        "Johor",
-        "Kedah",
-        "Kelantan",
-        "Terengganu"
-      ]
-    },
-    {
-      "date": "20190530",
-      "name": "Harvest Festival",
-      "includes": [
-        "Labuan",
-        "Sabah"
-      ]
-    },
-    {
-      "date": "20190531",
-      "name": "Harvest Festival Holiday",
-      "includes": [
-        "Labuan",
-        "Sabah"
-      ]
-    },
-    {
-      "date": "2019051",
-      "name": "Labour Day",
-      "includes": [
-        "National"
-      ]
-    },
-    {
-      "date": "2019053",
-      "name": "Labour Day Holiday",
-      "includes": [
-        "Johor",
-        "Kedah"
-      ]
-    },
-    {
-      "date": "2019057",
+      "date": "20200507",
       "name": "Hari Hol Pahang",
-      "includes": [
-        "Pahang"
-      ]
+      "includes": ["Pahang"],
+      "excludes": []
     },
     {
-      "date": "2019057",
-      "name": "Wesak Day",
-      "includes": [
-        "National"
-      ]
-    },
-    {
-      "date": "20190510",
+      "date": "20200510",
       "name": "Nuzul Al-Quran",
-      "includes": [
-        "National"
-      ],
-      "excludes": [
-        "Johor",
-        "Kedah",
-        "Melaka",
-        "Negeri Sembilan",
-        "Sabah",
-        "Sarawak"
-      ]
+      "includes": ["National"],
+      "excludes": ["Johor", "Kedah", "Melaka", "Negeri Sembilan", "Sabah", "Sarawak"]
     },
     {
-      "date": "20190511",
+      "date": "20200511",
       "name": "Nuzul Al-Quran Holiday",
-      "includes": [
-        "Kuala Lumpur",
-        "Labuan",
-        "Pahang",
-        "Penang",
-        "Perak",
-        "Perlis",
-        "Putrajaya",
-        "Selangor"
-      ]
+      "includes": ["Kuala Lumpur", "Labuan", "Pahang", "Penang", "Perak", "Perlis", "Putrajaya", "Selangor"],
+      "excludes": []
     },
     {
-      "date": "20190524",
+      "date": "20200524",
       "name": "Hari Raya Aidilfitri",
-      "includes": [
-        "National"
-      ]
+      "includes": ["National"],
+      "excludes": []
     },
     {
-      "date": "20190525",
+      "date": "20200525",
+      "name": "Hari Raya Aidilfitri",
+      "includes": ["National"],
+      "excludes": []
+    },
+    {
+      "date": "20200526",
       "name": "Hari Raya Aidilfitri Holiday",
-      "includes": [
-        "National"
-      ]
+      "includes": ["National"],
+      "excludes": ["Johor", "Kedah", "Kelantan", "Terengganu"]
     },
     {
-      "date": "20190526",
-      "name": "Hari Raya Aidilfitri Holiday",
-      "includes": [
-        "National"
-      ],
-      "excludes": [
-        "Johor",
-        "Kedah",
-        "Kelantan",
-        "Terengganu"
-      ]
-    },
-    {
-      "date": "20190530",
+      "date": "20200530",
       "name": "Harvest Festival",
-      "includes": [
-        "Labuan",
-        "Sabah"
-      ]
+      "includes": ["Labuan", "Sabah"],
+      "excludes": []
     },
     {
-      "date": "20190531",
+      "date": "20200531",
+      "name": "Harvest Festival",
+      "includes": ["Labuan", "Sabah"],
+      "excludes": []
+    },
+    {
+      "date": "20200601",
       "name": "Harvest Festival Holiday",
-      "includes": [
-        "Labuan",
-        "Sabah"
-      ]
+      "includes": ["Labuan", "Sabah"],
+      "excludes": []
     },
     {
-      "date": "20190601",
+      "date": "20200601",
       "name": "Hari Gawai",
-      "includes": [
-        "Sarawak"
-      ]
+      "includes": ["Sarawak"],
+      "excludes": []
     },
     {
-      "date": "20190601",
+      "date": "20200602",
       "name": "Hari Gawai",
-      "includes": [
-        "Sarawak"
-      ]
+      "includes": ["Sarawak"],
+      "excludes": []
     },
     {
-      "date": "20190601",
-      "name": "Hari Gawai",
-      "includes": [
-        "Sarawak"
-      ]
-    },
-    {
-      "date": "20190601",
-      "name": "Harvest Festival Holiday",
-      "includes": [
-        "Labuan",
-        "Sabah"
-      ]
-    },
-    {
-      "date": "20190602",
-      "name": "Hari Gawai Holiday",
-      "includes": [
-        "Sarawak"
-      ]
-    },
-    {
-      "date": "20190606",
+      "date": "20200608",
       "name": "Agong's Birthday",
-      "includes": [
-        "National"
-      ]
+      "includes": ["National"],
+      "excludes": []
     },
     {
-      "date": "20190607",
-      "name": "Agong's Birthday Holiday",
-      "includes": [
-        "Kelantan",
-        "Terengganu"
-      ]
-    },
-    {
-      "date": "20190021",
+      "date": "20200621",
       "name": "Sultan of Kedah's Birthday",
-      "includes": [
-        "Kedah"
-      ]
+      "includes": ["Kedah"],
+      "excludes": []
     },
     {
-      "date": "20190707",
+      "date": "20200707",
       "name": "Georgetown World Heritage City Day",
-      "includes": [
-        "Penang"
-      ]
+      "includes": ["Penang"],
+      "excludes": []
     },
     {
-      "date": "20190711",
+      "date": "20200711",
       "name": "Penang Governor's Birthday",
-      "includes": [
-        "Penang"
-      ]
+      "includes": ["Penang"],
+      "excludes": []
     },
     {
-      "date": "20190717",
+      "date": "20200717",
       "name": "Raja Perlis' Birthday",
-      "includes": [
-        "Perlis"
-      ]
+      "includes": ["Perlis"],
+      "excludes": []
     },
     {
-      "date": "20190722",
+      "date": "20200722",
       "name": "Sarawak Day",
-      "includes": [
-        "Sarawak"
-      ]
+      "includes": ["Sarawak"],
+      "excludes": []
     },
     {
-      "date": "20190730",
+      "date": "20200730",
       "name": "Sultan of Pahang's Birthday",
-      "includes": [
-        "Pahang"
-      ]
+      "includes": ["Pahang"],
+      "excludes": []
     },
     {
-      "date": "20190730",
+      "date": "20200730",
       "name": "Arafat Day",
-      "includes": [
-        "Terengganu"
-      ]
+      "includes": ["Terengganu"],
+      "excludes": []
     },
     {
-      "date": "20190731",
+      "date": "20200731",
       "name": "Hari Raya Haji",
-      "includes": [
-        "National"
-      ]
+      "includes": ["National"],
+      "excludes": []
     },
     {
-      "date": "20190801",
+      "date": "20200801",
+      "name": "Hari Raya Haji",
+      "includes": ["Kedah", "Kelantan", "Perlis", "Terengganu"],
+      "excludes": []
+    },
+    {
+      "date": "20200802",
       "name": "Hari Raya Haji Holiday",
-      "includes": [
-        "Kedah",
-        "Kelantan",
-        "Perlis",
-        "Terengganu"
-      ]
+      "includes": ["Kelantan", "Terengganu"],
+      "excludes": []
     },
     {
-      "date": "20190802",
-      "name": "Hari Raya Haji Holiday",
-      "includes": [
-        "Kelantan",
-        "Terengganu"
-      ]
-    },
-    {
-      "date": "201908020",
+      "date": "20200820",
       "name": "Awal Muharram",
-      "includes": [
-        "National"
-      ]
+      "includes": ["National"],
+      "excludes": []
     },
     {
-      "date": "20190831",
+      "date": "20200831",
       "name": "Merdeka Day",
-      "includes": [
-        "National"
-      ]
+      "includes": ["National"],
+      "excludes": []
     },
     {
-      "date": "20190916",
+      "date": "20200916",
       "name": "Malaysia Day",
-      "includes": [
-        "National"
-      ]
+      "includes": ["National"],
+      "excludes": []
     },
     {
-      "date": "20190924",
+      "date": "20200924",
       "name": "Hari Hol Almarhum Sultan Iskandar",
-      "includes": [
-        "Johor"
-      ]
+      "includes": ["Johor"],
+      "excludes": []
     },
     {
-      "date": "20191003",
+      "date": "20200926",
+      "name": "Sabah State Election Polling Day",
+      "includes": ["Sabah"],
+      "excludes": []
+    },
+    {
+      "date": "20201003",
       "name": "Sabah Governor's Birthday",
-      "includes": [
-        "Sabah"
-      ]
+      "includes": ["Sabah"],
+      "excludes": []
     },
     {
-      "date": "2019109",
+      "date": "20201009",
       "name": "Melaka Governor's Birthday",
-      "includes": [
-        "Melaka"
-      ]
+      "includes": ["Melaka"],
+      "excludes": []
     },
     {
-      "date": "20191010",
+      "date": "20201010",
       "name": "Sarawak Governor's Birthday",
-      "includes": [
-        "Sarawak"
-      ]
+      "includes": ["Sarawak"],
+      "excludes": []
     },
     {
-      "date": "20191029",
+      "date": "20201029",
       "name": "Prophet Muhammad's Birthday",
-      "includes": [
-        "National"
-      ]
+      "includes": ["National"],
+      "excludes": []
     },
     {
-      "date": "20191106",
+      "date": "20201106",
       "name": "Sultan of Perak's Birthday",
-      "includes": [
-        "Perak"
-      ]
+      "includes": ["Perak"],
+      "excludes": []
     },
     {
-      "date": "20191111",
+      "date": "20201111",
       "name": "Sultan of Kelantan's Birthday",
-      "includes": [
-        "Kelantan"
-      ]
+      "includes": ["Kelantan"],
+      "excludes": []
     },
     {
-      "date": "20191112",
-      "name": "Sultan of Kelantan's Birthday Holiday",
-      "includes": [
-        "Kelantan"
-      ]
+      "date": "20201112",
+      "name": "Sultan of Kelantan's Birthday",
+      "includes": ["Kelantan"],
+      "excludes": []
     },
     {
-      "date": "20191114",
+      "date": "20201114",
       "name": "Deepavali",
-      "includes": [
-        "National"
-      ],
-      "excludes": [
-        "Sarawak"
-      ]
+      "includes": ["National"],
+      "excludes": ["Sarawak"]
     },
     {
-      "date": "20191115",
+      "date": "20201115",
       "name": "Deepavali Holiday",
-      "includes": [
-        "Kelantan",
-        "Terengganu"
-      ]
+      "includes": ["Kelantan", "Terengganu"],
+      "excludes": []
     },
     {
-      "date": "20191211",
+      "date": "20201211",
       "name": "Sultan of Selangor's Birthday",
-      "includes": [
-        "Selangor"
-      ]
+      "includes": ["Selangor"],
+      "excludes": []
     },
     {
-      "date": "20191225",
+      "date": "20201225",
       "name": "Christmas Day",
-      "includes": [
-        "National"
-      ]
+      "includes": ["National"],
+      "excludes": []
     },
     {
-      "date": "20191227",
-      "name": "Christmas Holiday",
-      "includes": [
-        "Johor",
-        "Kedah"
-      ]
+      "date": "20201227",
+      "name": "Christmas Day Holiday",
+      "includes": ["Johor", "Kedah"],
+      "excludes": []
     }
   ],
   "2021": [
